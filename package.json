@@ -1,0 +1,45 @@
+{
+  "name": "valibot-typed-regex",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Type-level regex parsing for Valibot pipelines -- compile-time syntax validation and output narrowing.",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -b",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:types": "vitest typecheck --run",
+    "lint": "eslint . --quiet",
+    "lint:fix": "eslint . --fix --quiet",
+    "clean": "rimraf dist tsconfig.build.tsbuildinfo"
+  },
+  "peerDependencies": {
+    "valibot": ">=1.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "@stylistic/eslint-plugin": "^4.4.1",
+    "@types/node": "^22.15.0",
+    "eslint": "^9.28.0",
+    "jiti": "^2.7.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.0",
+    "valibot": "^1.4.0",
+    "vitest": "^3.2.1"
+  },
+  "packageManager": "pnpm@10.11.0",
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
