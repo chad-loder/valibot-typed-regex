@@ -42,7 +42,7 @@ typedRegex("^\\d{3}$")          // --> `${number}`
 
 // Structured templates
 typedRegex("^(\\d+)\\.(\\d+)\\.(\\d+)$")
-//                                 --> `${number}.${number}.${number}`
+//                                --> `${number}.${number}.${number}`
 
 // Quantifiers
 typedRegex("^a{2,4}$")          // --> "aa" | "aaa" | "aaaa"
