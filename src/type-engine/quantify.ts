@@ -70,13 +70,23 @@ export type ParsePossibleRange<
       ? s.Error<WriteUnmatchedQuantifierError<ParseQuantifier<TUnscanned, TParsed>>>
       : [TParsed["min"], TParsed["max"]] extends ([never, unknown] | [unknown, never])
         ? s.Error<WriteUnnaturalNumberQuantifierError<ParseQuantifier<TUnscanned, TParsed>>>
-        : s.PushQuantifier<
-          TState,
-          TParsed["min"],
-          TParsed["max"],
-          TParsed["unscanned"] extends Scanner.Shift<"?", infer TLazy> ? TLazy
-            : TParsed["unscanned"]
-        >
+        : TParsed["max"] extends number
+          ? LessThanOrEqual<TParsed["min"], TParsed["max"]> extends true
+            ? s.PushQuantifier<
+              TState,
+              TParsed["min"],
+              TParsed["max"],
+              TParsed["unscanned"] extends Scanner.Shift<"?", infer TLazy> ? TLazy
+                : TParsed["unscanned"]
+            >
+            : s.Error<WriteReversedQuantifierRangeError<ParseQuantifier<TUnscanned, TParsed>>>
+          : s.PushQuantifier<
+            TState,
+            TParsed["min"],
+            TParsed["max"],
+            TParsed["unscanned"] extends Scanner.Shift<"?", infer TLazy> ? TLazy
+              : TParsed["unscanned"]
+          >
     : s.ShiftQuantifiable<TState, "{", TUnscanned>;
 
 export type Quantify<
@@ -161,7 +171,10 @@ type LoopUntilMax<
 export type QuantifyingChar = "*" | "+" | "?";
 
 export type WriteUnmatchedQuantifierError<TQuantifier extends string> =
-  `Quantifier ${TQuantifier} requires a preceding token`;
+  `Nothing to repeat (${TQuantifier} requires a preceding token)`;
 
 export type WriteUnnaturalNumberQuantifierError<TQuantifier extends string> =
-  `Quantifier ${TQuantifier} must use natural numbers`;
+  `${TQuantifier} quantifier must use non-negative integers`;
+
+export type WriteReversedQuantifierRangeError<TQuantifier extends string> =
+  `Numbers out of order in ${TQuantifier} quantifier`;

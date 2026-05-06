@@ -48,12 +48,15 @@ type _SetIndex<
     : TResult;
 
 export type WriteUnclosedGroupMessage<TMissingChar extends string> =
-  `Missing ${TMissingChar}`;
+  TMissingChar extends ")" ? "Unterminated group"
+    : TMissingChar extends "]" ? "Unterminated character class"
+      : TMissingChar extends ">" ? "Unterminated group name"
+        : `Missing ${TMissingChar}`;
 
 export type WriteUnmatchedGroupCloseMessage<
   TChar extends string,
   TUnscanned extends string,
-> = `Unmatched ${TChar}${TUnscanned extends "" ? "" : ` before ${TUnscanned}`}`;
+> = `Unmatched '${TChar}'${TUnscanned extends "" ? "" : ` before ${TUnscanned}`}`;
 
 export declare namespace Scanner {
   export type Shift<

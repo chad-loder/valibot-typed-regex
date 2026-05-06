@@ -6,8 +6,8 @@ export type ParseRegex<TPattern extends string> =
   ParseState<State.Initialize<TPattern, "">>;
 
 export type ValidateRegex<TPattern extends string> =
-  ParseRegex<TPattern> extends infer TError extends InternalErrorMessage
-    ? TError
+  ParseRegex<TPattern> extends InternalErrorMessage<infer TMessage>
+    ? `typedRegex: ${TMessage}`
     : TPattern;
 
 export type InferRegexOutput<TPattern extends string> =

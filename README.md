@@ -2,6 +2,8 @@
 
 Type-level regex engine for Valibot. Takes a string literal pattern, **narrows the output type** to match, and **validates regex syntax at compile time**.
 
+<video src="docs/demo.webm" autoplay loop muted playsinline></video>
+
 ```ts
 import * as v from "valibot";
 import { typedRegex } from "valibot-typed-regex";

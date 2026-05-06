@@ -60,7 +60,7 @@ export type ParseEscapedChar<TChar extends string> =
 export type WriteUnresolvableBackreferenceMessage<TRef extends string | number> =
   `Group ${TRef} does not exist`;
 
-export type TrailingBackslashMessage = "A regex cannot end with \\";
+export type TrailingBackslashMessage = "\\ at end of pattern";
 
 export type MissingBackreferenceNameMessage =
   "\\k must be followed by a named reference like <name>";
@@ -69,7 +69,7 @@ export type WriteInvalidUnicodePropertyMessage<TChar extends UnicodePropertyChar
   `\\${TChar} must be followed by a property like \\${TChar}{Emoji_Presentation}`;
 
 export type WriteUnnecessaryEscapeMessage<TChar extends string> =
-  `Escape preceding ${TChar} is unnecessary and should be removed.`;
+  `Unnecessary escape: \\${TChar} can be written as ${TChar}`;
 
 export type WriteStringEscapableMessage<TChar extends StringLiteralEscape> =
   `\\${TChar} is a JavaScript string escape. Use a single backslash: regex('\\${TChar}')`;
@@ -78,7 +78,7 @@ export type WriteUnsupportedEscapeMessage<TChar extends UnsupportedRegexEscape> 
   `\\${TChar} is valid regex syntax but is not supported by the type engine. The pattern will work at runtime but the output type will be string.`;
 
 export type CaretNotationMessage =
-  "\\cX notation is not supported. Use hex (\\x) or unicode (\\u) instead.";
+  "\\cX notation is not supported";
 
 export type StringLiteralEscape = "t" | "n" | "r" | "f" | "v";
 

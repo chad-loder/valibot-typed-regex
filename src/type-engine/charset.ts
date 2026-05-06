@@ -65,7 +65,7 @@ type ExtractRange<
   TSequence extends string,
 > = TSequence extends `${string}${TStart}${infer Middle}${TEnd}${string}`
   ? RangeWithinBudget<Middle> extends true
-    ? TStart | StringToUnion<Middle> | TEnd
+    ? StringToUnion<`${TStart}${Middle}${TEnd}`>
     : string
   : TStart extends TEnd
     ? TStart

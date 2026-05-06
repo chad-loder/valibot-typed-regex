@@ -112,8 +112,18 @@ describe("syntax errors caught at compile time", () => {
     });
 
     test("space in count", () => {
-      // @ts-expect-error — Quantifier { 1} must use natural numbers
+      // @ts-expect-error — Quantifier { 1} must use non-negative integers
       typedRegex("^a{ 1}$");
+    });
+
+    test("reversed range {3,1}", () => {
+      // @ts-expect-error — Numbers out of order in {3,1} quantifier
+      typedRegex("^a{3,1}$");
+    });
+
+    test("reversed range {10,2}", () => {
+      // @ts-expect-error — Numbers out of order in {10,2} quantifier
+      typedRegex("^a{10,2}$");
     });
   });
 
