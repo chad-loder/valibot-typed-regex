@@ -2,7 +2,7 @@
 
 Type-level regex engine for Valibot. Takes a string literal pattern, **narrows the output type** to match, and **validates regex syntax at compile time**.
 
-<video src="https://chad-loder.github.io/valibot-typed-regex/demo.webm" autoplay loop muted playsinline></video>
+[demo.webm](https://github.com/user-attachments/assets/52b099cd-5589-462b-8d67-1e59f0c5a7f3)
 
 ```ts
 import * as v from "valibot";
